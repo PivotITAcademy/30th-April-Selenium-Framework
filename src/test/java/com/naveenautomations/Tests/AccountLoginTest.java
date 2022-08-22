@@ -28,6 +28,11 @@ public class AccountLoginTest extends TestBase {
 		MyAccountPage map = accountLogin.login("user10@gmail.com", "Qwerty123");
 		Assert.assertEquals(map.getTextFromMyAccount(), "My Account");
 	}
+	
+	@Test
+	public void failTest() {
+		Assert.assertTrue(false);
+	}
 
 	@AfterMethod
 	public void quitBrowserSession() {
