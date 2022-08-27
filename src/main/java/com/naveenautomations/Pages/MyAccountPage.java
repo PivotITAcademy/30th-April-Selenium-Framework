@@ -4,11 +4,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.naveenautomation.Utils.ProxyDriver;
+import com.naveenautomation.Utils.Utils;
 import com.naveenautomation.base.TestBase;
 
 public class MyAccountPage extends TestBase {
 
 	public MyAccountPage() {
+		waitForDocumentCompleteState(20);
 		PageFactory.initElements(webDriver, this);
 	}
 
@@ -16,7 +19,7 @@ public class MyAccountPage extends TestBase {
 	private WebElement myaccountText;
 
 	public String getTextFromMyAccount() {
-		return myaccountText.getText();
+		return Utils.getText(myaccountText);
 	}
 
 }
