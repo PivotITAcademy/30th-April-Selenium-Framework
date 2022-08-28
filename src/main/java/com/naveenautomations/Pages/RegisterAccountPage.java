@@ -1,5 +1,11 @@
 package com.naveenautomations.Pages;
 
-public class RegisterAccountPage {
+import org.openqa.selenium.WebDriver;
+
+public class RegisterAccountPage extends Page {
+
+	public RegisterAccountPage(WebDriver wd, boolean waitForPageToLoad) {
+		super(wd, waitForPageToLoad);
+	}
 
 }

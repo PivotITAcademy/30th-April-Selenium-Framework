@@ -17,9 +17,11 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 
+import com.carbonite.Browser.Browser;
 import com.naveenautomation.Utils.ProxyDriver;
 import com.naveenautomation.Utils.Utils;
 import com.naveenautomation.Utils.WebDriverEvents;
+import com.naveenautomations.Pages.Page;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -30,7 +32,7 @@ public class TestBase {
 	public static Logger logger;
 	public static EventFiringWebDriver e_driver;
 	public static WebDriverEvents events;
-	public static JavascriptExecutor jse;
+	private static final Browser DEFAULT_BROWSER = Browser.FIREFOX;
 
 	public TestBase() {
 		prop = new Properties();
@@ -61,18 +63,17 @@ public class TestBase {
 
 	public void intialization() {
 		// Manages the driver for the browser on which testing is performed
-		String browserName = prop.getProperty("browser");
+		
 
-		switch (browserName) {
-		case "chrome":
-			webDriver = WebDriverManager.chromedriver().create();
-			// webDriver=new ChromeDriver();
+		switch (DEFAULT_BROWSER.getBrowsername()) {
+		case "Chrome":
+			webDriver = new ProxyDriver(WebDriverManager.chromedriver().create());
 			break;
-		case "firefox":
-			webDriver = WebDriverManager.firefoxdriver().create();
+		case "Firefox":
+			webDriver = new ProxyDriver(WebDriverManager.firefoxdriver().create());
 			break;
-		case "edge":
-			webDriver = WebDriverManager.edgedriver().create();
+		case "MicrosoftEdge":
+			webDriver = new ProxyDriver(WebDriverManager.edgedriver().create());
 			break;
 
 		default:
@@ -80,13 +81,12 @@ public class TestBase {
 			break;
 		}
 
-		jse=(JavascriptExecutor) webDriver;
-		
-		e_driver = new EventFiringWebDriver(webDriver);
-		events = new WebDriverEvents();
-		e_driver.register(events);
-
-		webDriver = e_driver;
+		/*
+		 * e_driver = new EventFiringWebDriver(webDriver); events = new
+		 * WebDriverEvents(); e_driver.register(events);
+		 * 
+		 * webDriver = e_driver;
+		 */
 
 		webDriver.manage().window().maximize();
 		webDriver.get(prop.getProperty("base_url"));
@@ -95,21 +95,5 @@ public class TestBase {
 
 	public void quitBrowser() {
 		webDriver.quit();
-	}
-	
-	public void waitForDocumentCompleteState(int timeOutInSeconds) {
-		new WebDriverWait(webDriver, timeOutInSeconds).until((ExpectedCondition<Boolean>) v -> {
-			logger.info("Verifying page has loaded......");
-			jse = (JavascriptExecutor) webDriver;
-			String documentIsReady = jse.executeScript("return document.readyState").toString();
-			while (true) {
-				if (documentIsReady.equalsIgnoreCase("complete")) {
-					logger.info("Page has loaded completely......");
-					return true;
-				} else {
-					return false;
-				}
-			}
-		});
 	}
 }

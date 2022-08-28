@@ -1,39 +1,35 @@
 package com.naveenautomations.Pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import static org.testng.Assert.fail;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.naveenautomation.Utils.ProxyDriver;
-import com.naveenautomation.Utils.Utils;
-import com.naveenautomation.base.TestBase;
 
-public class AccountLogin extends TestBase {
-	public AccountLogin() {
-		waitForDocumentCompleteState(10);
-		PageFactory.initElements(webDriver, this);
+public class AccountLogin extends Page {
+
+	private static final String PAGE_URL = "account/login";
+
+	public AccountLogin(WebDriver wd, boolean waitForPageToLoad) {
+		super(wd, waitForPageToLoad);
 	}
 
-	@FindBy(id = "input-email")
-	private WebElement inputEmailField;
-
-	@FindBy(id = "input-password")
-	private WebElement enterPasswordField;
-
-	@FindBy(css = "input[type='submit']")
-	private WebElement submitBtn;
+	private By inputEmailField = By.id("input-email");
+	private By enterPasswordField = By.id("input-password");
+	private By submitBtn = By.cssSelector("input[type='submit']");
 
 	public void enterEmail(String email) {
-		Utils.sendKeysUsingJavascript(inputEmailField, email);
+		((ProxyDriver) wd).sendKeys(inputEmailField, email);
 	}
 
 	public void enterPassword(String password) {
-		Utils.sendKeys(enterPasswordField, password);
+		((ProxyDriver) wd).sendKeys(enterPasswordField, password);
 	}
 
 	public MyAccountPage clickSubmitBtn() {
-		Utils.click(submitBtn);
-		return new MyAccountPage();
+		((ProxyDriver) wd).click(submitBtn);
+		return new MyAccountPage(wd, true);
 	}
 
 	public MyAccountPage login(String email, String password) {
@@ -42,4 +38,15 @@ public class AccountLogin extends TestBase {
 		return clickSubmitBtn();
 	}
 
+	@Override
+	protected void isLoaded() throws Error {
+		if (!urlContains(wd.getCurrentUrl())) {
+			fail("Page didn't load");
+		}
+	}
+
+	@Override
+	public String getPageURL() {
+		return String.format("%s%s", getDomain(), PAGE_URL);
+	}
 }

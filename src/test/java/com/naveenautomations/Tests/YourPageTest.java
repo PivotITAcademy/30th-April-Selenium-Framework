@@ -1,5 +1,6 @@
 package com.naveenautomations.Tests;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +19,7 @@ public class YourPageTest extends TestBase {
 	@BeforeMethod
 	public void startBorwserSession() {
 		intialization();
-		yp = new YourStorePage();
+		yp = new YourStorePage(webDriver,true);
 	}
 
 	@Test()

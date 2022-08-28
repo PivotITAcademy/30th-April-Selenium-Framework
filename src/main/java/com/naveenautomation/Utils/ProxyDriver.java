@@ -5,19 +5,20 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.naveenautomation.base.TestBase;
 
-public class ProxyDriver implements WebDriver {
+public class ProxyDriver implements WebDriver, JavascriptExecutor {
 	private WebDriver driver;
 
 	public ProxyDriver(WebDriver wd) {
 		driver = wd;
-
 	}
 
 	public String getText(By Locator) {
@@ -25,7 +26,7 @@ public class ProxyDriver implements WebDriver {
 	}
 
 	public void click(By locator) {
-		this.click(locator,5);
+		this.waitForElementToBeClickable(locator, 5).click();
 	}
 
 	public Object executeScript(String script, Object... args) {
@@ -131,9 +132,60 @@ public class ProxyDriver implements WebDriver {
 		return driver.manage();
 	}
 
-	
-	public void click(By locator, int timeOutInSeconds) {
-		this.waitForElementToBeClickable(locator, timeOutInSeconds).click();
+	public void sendKeys(By by, String keysInput) {
+		new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(driver.findElement(by)))
+				.sendKeys(keysInput);
+	}
+
+	public boolean isDisplayed(By by) {
+		try {
+			waitForElementToBeVisible(by, 10);
+			return this.findElement(by).isDisplayed();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
+
+	public boolean isEnabled(By by) {
+		try {
+			waitForElementToBeVisible(by, 10);
+			return this.findElement(by).isEnabled();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
+
+	public void selectFromDropDown(WebElement element, String value) {
+		waitForElementToBeSelectable(element);
+		Select sc = new Select(element);
+		try {
+			sc.selectByValue(value);
+		} catch (Exception e) {
+			sc.selectByVisibleText(value);
+		}
+	}
+
+	public void switchToNewTab(By element) {
+		String parentHandle = this.getWindowHandle();
+		waitForElementToBeClickable(element, 5);
+
+		Set<String> allWindowHandles = this.getWindowHandles();
+		for (String windowHandle : allWindowHandles) {
+			if (!windowHandle.equals(parentHandle)) {
+				this.switchTo().window(windowHandle);
+			}
+		}
+
+	}
+
+	public void acceptAlert() {
+		new WebDriverWait(this, 10).until(ExpectedConditions.alertIsPresent()).accept();
+	}
+
+	public void dismissAlert() {
+		new WebDriverWait(this, 10).until(ExpectedConditions.alertIsPresent()).dismiss();
 	}
 
 	public WebElement waitForElementToBeClickable(By locator, int timeOutInSeconds) {
@@ -143,5 +195,9 @@ public class ProxyDriver implements WebDriver {
 	public WebElement waitForElementToBeVisible(By Locator, int timeOutInSeconds) {
 		return new WebDriverWait(this, timeOutInSeconds).until(ExpectedConditions.visibilityOfElementLocated(Locator));
 	}
-	
+
+	public void waitForElementToBeSelectable(WebElement element) {
+		new WebDriverWait(this, 10).until(ExpectedConditions.elementSelectionStateToBe(element, true));
+	}
+
 }
