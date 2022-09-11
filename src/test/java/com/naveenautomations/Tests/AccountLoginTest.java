@@ -36,9 +36,10 @@ public class AccountLoginTest extends TestBase {
 
 	@DataProvider(name = "LoginData")
 	String[][] dataProviderToLogin() throws Exception {
-		String filePath = "C:\\Users\\skpos\\Downloads\\Book 2.xlsx";
-		int row = ExcelUtils.getRowsCount(filePath, "Sheet1");
-		int col = ExcelUtils.getColumnCount(filePath, "Sheet1", row);
+
+		String filePath = "./Book1.xlsx";
+		int row = ExcelUtils.getRowsCount(filePath, "Sheet3");
+		int col = ExcelUtils.getColumnCount(filePath, "Sheet3", row);
 
 		String[][] logindata = new String[row][col];
 		for (int i = 1; i <= row; i++) {
