@@ -34,6 +34,7 @@ public class TestBase {
 	public static EventFiringWebDriver e_driver;
 	public static WebDriverEvents events;
 	private static final Browser DEFAULT_BROWSER = Browser.GOOGLE_CHROME;
+
 	private static final EnviornmentUtils ENV = EnviornmentUtils.PRODUCTION;
 
 	public TestBase() {

@@ -19,7 +19,7 @@ public class YourPageTest extends TestBase {
 	@BeforeMethod
 	public void startBorwserSession() {
 		intialization();
-		yp = new YourStorePage(webDriver,true);
+		yp = new YourStorePage(webDriver, true);
 	}
 
 	@Test()
