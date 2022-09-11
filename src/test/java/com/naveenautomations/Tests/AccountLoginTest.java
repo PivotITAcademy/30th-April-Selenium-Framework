@@ -41,7 +41,7 @@ public class AccountLoginTest extends TestBase {
 
 	@DataProvider(name = "LoginData")
 	String[][] dataProviderToLogin() throws Exception {
-		String filePath = "F:\\Carbonite\\testingframework\\Book1.xlsx";
+		String filePath = "./Book1.xlsx";
 		int row = ExcelUtils.getRowsCount(filePath, "Sheet3");
 		int col = ExcelUtils.getColumnCount(filePath, "Sheet3", row);
 

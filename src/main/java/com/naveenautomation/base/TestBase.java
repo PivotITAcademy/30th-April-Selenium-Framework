@@ -21,6 +21,7 @@ import com.carbonite.Browser.Browser;
 import com.naveenautomation.Utils.ProxyDriver;
 import com.naveenautomation.Utils.Utils;
 import com.naveenautomation.Utils.WebDriverEvents;
+import com.naveenautomation.env.EnviornmentUtils;
 import com.naveenautomations.Pages.Page;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -32,7 +33,8 @@ public class TestBase {
 	public static Logger logger;
 	public static EventFiringWebDriver e_driver;
 	public static WebDriverEvents events;
-	private static final Browser DEFAULT_BROWSER = Browser.FIREFOX;
+	private static final Browser DEFAULT_BROWSER = Browser.GOOGLE_CHROME;
+	private static final EnviornmentUtils ENV = EnviornmentUtils.PRODUCTION;
 
 	public TestBase() {
 		prop = new Properties();
@@ -63,7 +65,6 @@ public class TestBase {
 
 	public void intialization() {
 		// Manages the driver for the browser on which testing is performed
-		
 
 		switch (DEFAULT_BROWSER.getBrowsername()) {
 		case "Chrome":
@@ -88,8 +89,23 @@ public class TestBase {
 		 * webDriver = e_driver;
 		 */
 
+		switch (ENV) {
+		case Dev:
+			webDriver.get(prop.getProperty("base_dev_url"));
+			break;
+		case STAGE:
+			webDriver.get(prop.getProperty("base_stage_url"));
+			break;
+		case PRODUCTION:
+			webDriver.get(prop.getProperty("base_url"));
+			break;
+		default:
+			System.out.println("Not a correct case");
+
+			break;
+		}
 		webDriver.manage().window().maximize();
-		webDriver.get(prop.getProperty("base_url"));
+
 		webDriver.manage().deleteAllCookies();
 	}
 
