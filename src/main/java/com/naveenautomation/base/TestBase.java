@@ -41,7 +41,7 @@ public class TestBase {
 		FileInputStream file;
 		try {
 			file = new FileInputStream(
-					"F:\\Carbonite\\testingframework\\src\\main\\java\\com\\naveenautomation\\Config\\config.properties");
+					"./src\\main\\java\\com\\naveenautomation\\Config\\config.properties");
 			try {
 				prop.load(file);
 			} catch (IOException e) {
