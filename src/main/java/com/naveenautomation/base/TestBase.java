@@ -32,14 +32,14 @@ public class TestBase {
 	public static Logger logger;
 	public static EventFiringWebDriver e_driver;
 	public static WebDriverEvents events;
-	private static final Browser DEFAULT_BROWSER = Browser.FIREFOX;
+	private static final Browser DEFAULT_BROWSER = Browser.GOOGLE_CHROME;
 
 	public TestBase() {
 		prop = new Properties();
 		FileInputStream file;
 		try {
 			file = new FileInputStream(
-					"F:\\Carbonite\\testingframework\\src\\main\\java\\com\\naveenautomation\\Config\\config.properties");
+					"./src\\main\\java\\com\\naveenautomation\\Config\\config.properties");
 			try {
 				prop.load(file);
 			} catch (IOException e) {
