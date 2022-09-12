@@ -44,7 +44,7 @@ public class AccountLoginTest extends TestBase {
 		String[][] logindata = new String[row][col];
 		for (int i = 1; i <= row; i++) {
 			for (int j = 0; j < col; j++) {
-				logindata[i - 1][j] = ExcelUtils.getCellData(filePath, "Sheet1", i, j);
+				logindata[i - 1][j] = ExcelUtils.getCellData(filePath, "Sheet3", i, j);
 			}
 		}
 
