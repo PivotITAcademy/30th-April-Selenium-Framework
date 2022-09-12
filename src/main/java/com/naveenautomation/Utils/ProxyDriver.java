@@ -26,6 +26,7 @@ public class ProxyDriver implements WebDriver, JavascriptExecutor {
 	}
 
 	public void click(By locator) {
+		Utils.sleep(5000);
 		this.waitForElementToBeClickable(locator, 5).click();
 	}
 
