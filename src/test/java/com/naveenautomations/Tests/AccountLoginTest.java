@@ -28,7 +28,7 @@ public class AccountLoginTest extends TestBase {
 		accountLogin = yp.clickloginBtn();
 	}
 
-	@Test(dataProvider = "LoginData", priority = 1)
+	@Test(dataProvider = "LoginData")
 	public void verifyCustomerLogin(String userName, String password) {
 		MyAccountPage map = accountLogin.login(userName, password);
 		Assert.assertEquals(map.getTextFromMyAccount(), "My Account");

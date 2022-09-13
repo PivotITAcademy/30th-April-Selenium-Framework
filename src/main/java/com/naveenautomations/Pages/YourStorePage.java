@@ -13,7 +13,7 @@ public class YourStorePage extends Page {
 		super(wd, waitForPageToLoad);
 	}
 
-	private By myAccountBtn = By.cssSelector("#top-links ul li:nth-of-type(2) span:first-of-type");
+	private By myAccountBtn = By.cssSelector("#top-links ul li:nth-of-type(2) span:first-of-type,a[title='My Account']");
 	private By loginBtn = By.cssSelector("#top-links ul.dropdown-menu li:last-of-type");
 	private By registerBtn = By.cssSelector("#top-links ul.dropdown-menu li:first-of-type");
 

@@ -99,6 +99,7 @@ public class TestBase {
 			break;
 		case PRODUCTION:
 			webDriver.get(prop.getProperty("base_url"));
+			System.out.println("The URL is "+ webDriver.getCurrentUrl());
 			break;
 		default:
 			System.out.println("Not a correct case");
