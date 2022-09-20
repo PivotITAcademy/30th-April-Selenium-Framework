@@ -2,6 +2,7 @@ package com.carbonite.Browser;
 
 public enum Browser {
 
+	//New Code
 	EDGE("MicrosoftEdge"), 
 	GOOGLE_CHROME("Chrome"), 
 	FIREFOX("Firefox");
