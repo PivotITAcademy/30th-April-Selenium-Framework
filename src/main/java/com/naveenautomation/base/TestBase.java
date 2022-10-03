@@ -33,6 +33,7 @@ public class TestBase {
 	public static Logger logger;
 	public static EventFiringWebDriver e_driver;
 	public static WebDriverEvents events;
+	public static Browser browser;
 	private static final Browser DEFAULT_BROWSER = Browser.GOOGLE_CHROME;
 
 	private static final EnviornmentUtils ENV = EnviornmentUtils.PRODUCTION;
@@ -41,8 +42,7 @@ public class TestBase {
 		prop = new Properties();
 		FileInputStream file;
 		try {
-			file = new FileInputStream(
-					"./src\\main\\java\\com\\naveenautomation\\Config\\config.properties");
+			file = new FileInputStream("./src\\main\\java\\com\\naveenautomation\\Config\\config.properties");
 			try {
 				prop.load(file);
 			} catch (IOException e) {
@@ -67,7 +67,7 @@ public class TestBase {
 	public void intialization() {
 		// Manages the driver for the browser on which testing is performed
 
-		switch (DEFAULT_BROWSER.getBrowsername()) {
+		switch (getBrowser().getBrowsername()) {
 		case "Chrome":
 			webDriver = new ProxyDriver(WebDriverManager.chromedriver().create());
 			break;
@@ -99,7 +99,7 @@ public class TestBase {
 			break;
 		case PRODUCTION:
 			webDriver.get(prop.getProperty("base_url"));
-			System.out.println("The URL is "+ webDriver.getCurrentUrl());
+			System.out.println("The URL is " + webDriver.getCurrentUrl());
 			break;
 		default:
 			System.out.println("Not a correct case");
@@ -113,5 +113,9 @@ public class TestBase {
 
 	public void quitBrowser() {
 		webDriver.quit();
+	}
+
+	public Browser getBrowser() {
+		return Browser.getByName(System.getProperty("browser", DEFAULT_BROWSER.toString()));
 	}
 }

@@ -2,8 +2,8 @@ package com.carbonite.Browser;
 
 public enum Browser {
 
-	//New Code
-	EDGE("MicrosoftEdge"), 
+	// New Code
+	EDGE("MicrosoftEdge"),
 	GOOGLE_CHROME("Chrome"), 
 	FIREFOX("Firefox");
 
@@ -12,26 +12,28 @@ public enum Browser {
 	Browser(String name) {
 		this.name = name;
 	}
-	
+
 	public String getBrowsername() {
 		return name;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name;
-		
+
 	}
-	
+
 	public static Browser getByName(String name) {
 
-		Browser returnvalue=null;
-		for(final Browser element: Browser.values()) {
-		if(element.toString().equals(name)) {
-			
-			returnvalue=element;
-		}	
+		Browser returnvalue = null;
+		for (final Browser element : Browser.values()) {
+			if (element.toString().equals(name)) {
+
+				returnvalue = element;
+			}
 		}
 		return returnvalue;
-		}
+	}
+	
+	
 }
