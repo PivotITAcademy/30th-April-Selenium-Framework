@@ -31,7 +31,7 @@ public class ExtentReportListener extends TestListenerAdapter {
 		String repName = "Extent Report" + "_" + timeStamp + ".html";
 
 		htmlReporter = new ExtentHtmlReporter("./Extent Reports/" + repName);
-		htmlReporter.loadXMLConfig(System.getProperty("user.dir") + "/extent-config.xml");
+		htmlReporter.loadXMLConfig("./extent-config.xml");
 
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);

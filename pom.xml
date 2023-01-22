@@ -9,12 +9,15 @@
 
 	<name>testingframework</name>
 	<!-- FIXME change it to the project's website -->
-	<url>https://naveenautomationlabs.com/opencart/index.php?route=common/home</url>
+	<url>https://naveenautomationlabs.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<selenium.version>3.141.59</selenium.version>
+		<testNG.version>7.3.0</testNG.version>
+		<webdriverVersion.version>5.1.0</webdriverVersion.version>
 	</properties>
 
 	<dependencies>
@@ -22,7 +25,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>3.141.59</version>
+			<version>${selenium.version}</version>
 		</dependency>
 
 
@@ -31,7 +34,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.3.0</version>
+			<version>${testNG.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -40,7 +43,7 @@
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
-			<version>5.1.0</version>
+			<version>${webdriverVersion.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->

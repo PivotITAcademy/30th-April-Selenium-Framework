@@ -4,25 +4,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 
 import com.carbonite.Browser.Browser;
 import com.naveenautomation.Utils.ProxyDriver;
-import com.naveenautomation.Utils.Utils;
 import com.naveenautomation.Utils.WebDriverEvents;
 import com.naveenautomation.env.EnviornmentUtils;
-import com.naveenautomations.Pages.Page;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -67,7 +61,7 @@ public class TestBase {
 	public void intialization() {
 		// Manages the driver for the browser on which testing is performed
 
-		switch (getBrowser().getBrowsername()) {
+		switch (DEFAULT_BROWSER.getBrowsername()) {
 		case "Chrome":
 			webDriver = new ProxyDriver(WebDriverManager.chromedriver().create());
 			break;

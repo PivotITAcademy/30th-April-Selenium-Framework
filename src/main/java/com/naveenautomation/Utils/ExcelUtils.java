@@ -3,6 +3,7 @@ package com.naveenautomation.Utils;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -42,7 +43,6 @@ public class ExcelUtils {
 		return colCount;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static String getCellData(String xFile, String sheetName, int rowNo, int colNo) throws Exception {
 		String data = "";
 		fi = new FileInputStream(xFile);
@@ -50,8 +50,7 @@ public class ExcelUtils {
 		ws = wb.getSheet(sheetName);
 		row = ws.getRow(rowNo);
 		cell = row.getCell(colNo);
-		cell.setCellType(cell.CELL_TYPE_STRING);
-		data = cell.getStringCellValue();
+		data=new DataFormatter().formatCellValue(cell);
 
 		return data;
 	}

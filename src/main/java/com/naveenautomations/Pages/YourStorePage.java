@@ -31,4 +31,10 @@ public class YourStorePage extends Page {
 		return new RegisterAccountPage(wd, true);
 	}
 
+	@Override
+	protected void isLoaded() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

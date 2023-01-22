@@ -24,4 +24,10 @@ public class ContactUsPage extends Page {
 		return ((ProxyDriver) wd).getText(errorMsg);
 	}
 
+	@Override
+	protected void isLoaded() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

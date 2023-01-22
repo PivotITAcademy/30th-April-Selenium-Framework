@@ -2,10 +2,15 @@ package com.naveenautomations.Pages;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.LoadableComponent;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class GeneralPage extends LoadableComponent<GeneralPage> {
 
@@ -41,7 +46,7 @@ public abstract class GeneralPage extends LoadableComponent<GeneralPage> {
 	protected abstract String getPageURL();
 
 	public void waitforPageToload() {
-		this.waitForDocumentCompleteststate();
+		this.waitForDocumentCompletestState();
 
 	}
 
@@ -76,13 +81,31 @@ public abstract class GeneralPage extends LoadableComponent<GeneralPage> {
 		return false;
 	}
 
-	public void waitForDocumentCompleteststate() {
+	public void waitForDocumentCompletestState() {
 		waitForDocumentCompleteState(DEFAULT_TIME_TO_WAIT_FOR_PAGE);
 
 	}
 
 	public void waitForDocumentCompleteState(int secondsToWait) {
-		wd.manage().timeouts().implicitlyWait(secondsToWait, TimeUnit.SECONDS);
+		new WebDriverWait(wd, secondsToWait).until((ExpectedCondition<Boolean>) driver -> {
+			while (true) {
+				String readyState = getDocumentReadyState();
+				if (readyState.equals("complete")) {
+					return true;
+				}
+			}
+		});
 
+	}
+
+	private String getDocumentReadyState() {
+		try {
+			JavascriptExecutor jse = (JavascriptExecutor) wd;
+			String val = jse.executeScript("return document.readyState").toString();
+			return val;
+		} catch (WebDriverException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

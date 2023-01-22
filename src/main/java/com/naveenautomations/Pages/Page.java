@@ -6,7 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
-public class Page extends GeneralPage {
+public abstract class Page extends GeneralPage {
 
 	public Page(WebDriver wd, boolean waitForPageToLoad) {
 		super(wd, waitForPageToLoad);
@@ -51,9 +51,6 @@ public class Page extends GeneralPage {
 	}
 
 	@Override
-	protected void isLoaded() throws Error {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void isLoaded();
 
 }

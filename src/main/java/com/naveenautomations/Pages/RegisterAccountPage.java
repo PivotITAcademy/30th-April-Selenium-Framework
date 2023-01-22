@@ -39,4 +39,10 @@ public class RegisterAccountPage extends Page {
 		return texts;
 	}
 
+	@Override
+	protected void isLoaded() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -23,4 +23,10 @@ public class NewsLetterPage extends Page {
 		return new MyAccountPage(wd, true);
 	}
 
+	@Override
+	protected void isLoaded() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

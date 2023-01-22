@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.naveenautomation.Utils.ProxyDriver;
-import com.naveenautomation.Utils.Utils;
 
 public class AccountLogin extends Page {
 
