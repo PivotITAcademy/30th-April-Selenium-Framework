@@ -20,7 +20,7 @@ public class MyAccountPage extends Page {
 		super(wd, waitForPageToLoad);
 	}
 
-	//Locators
+	//Locators added
 	private By newLetterBtn = By.cssSelector("div.list-group a:nth-of-type(12)");
 	private By myaccountText = By.cssSelector("#content h2");
 	private By newsLetterSubscriptionMessage = By.cssSelector("#account-account div");
