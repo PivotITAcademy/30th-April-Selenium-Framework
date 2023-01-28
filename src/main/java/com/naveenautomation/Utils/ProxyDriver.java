@@ -32,7 +32,7 @@ public class ProxyDriver implements WebDriver, JavascriptExecutor {
 
 	public Object executeScript(String script, Object... args) {
 		// TODO Auto-generated method stub
-		return null;
+		return ((JavascriptExecutor)driver).executeScript(script, args);
 	}
 
 	public Object executeAsyncScript(String script, Object... args) {
